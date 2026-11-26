@@ -6,7 +6,7 @@ const Students = (props) => {
     <div>
       <h2>Students</h2>
       <h4>I am {props.name} and age is {props.age}</h4>
-      <p>This is the Students component.</p>
+     
       
     </div>
     </>
