@@ -3,13 +3,6 @@ import axios from "axios"
 import {Table,TableHeader,TableRow,TableBody,TableCell, TableHead} from '@/components/ui/table'
 const Users = () => {
     const [users,setUsers]=useState([])
-    const getUsers = async () => {
-      const response = await axios.get(
-        'https://jsonplaceholder.typicode.com/users',
-      )
-      setUsers(response.data)
-    }
-
     const addUser=async()=>{
       const response = await axios.post(
         'https://jsonplaceholder.typicode.com/users',
@@ -22,7 +15,7 @@ const Users = () => {
       
     }
     const deleteUser=async()=>{
-      const response = await axios.delete(
+      await axios.delete(
         'https://jsonplaceholder.typicode.com/users/11'
       )
       console.log("user deleted");
@@ -30,9 +23,16 @@ const Users = () => {
     }
     
     useEffect(()=>{ 
-        addUser()
-        getUsers()
-        deleteUser()
+        const getUsers = async () => {
+          const response = await axios.get(
+            'https://jsonplaceholder.typicode.com/users',
+          )
+          setUsers(response.data)
+        }
+
+        void addUser()
+        void getUsers()
+        void deleteUser()
     },[])
   return (
     <div>
@@ -48,7 +48,7 @@ const Users = () => {
 
         <TableBody>
           {users.map((user) => (
-            <TableRow>
+            <TableRow key={user.id}>
               <TableCell>{user.name}</TableCell>
               <TableCell>{user.email}</TableCell>
             </TableRow>

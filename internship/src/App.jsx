@@ -1,35 +1,29 @@
-import Students from './components/Students'
-import { Button } from './components/ui/button'
-import Count from './hooks/Count'
 import Register from './hooks/Register'
 import Users from './hooks/Users'
-
+import { Link, Route, Routes } from 'react-router-dom'
+import Home from './pages/Home'
+import About from './pages/About'
+import Products from './pages/Products'
+import ProductDetails from './pages/ProductDetails'
 const App = () => {
-
-    let name = 'Tarunika'
-    let age = 19
 
     return (
         <>
-            <Users />
-            <Button variant="default">Default</Button>
-            <Button variant="destructive">Delete</Button>
-            <Button variant="outline">Outline</Button>
-            <Button variant="secondary">Secondary</Button>
-            <Button variant="ghost">Ghost</Button>
-
-            <Count />
-
-            <Register />
-
-            <div className="flex flex-col items-center justify-center p-4">
-                <h1>This is {name}</h1>
-                <p>Age: {age}</p>
-
-                <Students name={name} age={age} />
-
-                <Button>Click Me</Button>
-            </div>
+            <nav className="mx-2 flex items-center justify-around rounded-2xl bg-blue-600 py-4 text-lg">
+                <Link className="flex-1 text-center text-white hover:text-blue-100" to="/">Home</Link>
+                <Link className="flex-1 text-center text-white hover:text-blue-100" to="/about">About</Link>
+                <Link className="flex-1 text-center text-white hover:text-blue-100" to="/service">Service</Link>
+                <Link className="flex-1 text-center text-white hover:text-blue-100" to="/contact">Contact</Link>
+                <Link className="flex-1 text-center text-white hover:text-blue-100" to="/products">Products</Link>
+            </nav>
+            <Routes>
+               <Route path="/" element={<Home />} />
+               <Route path="/about" element={<About />} />
+               <Route path="/service" element={<Register />} />
+               <Route path="/contact" element={<Users />} />
+               <Route path="/products" element={<Products />} />
+               <Route path="/productDetails/:id" element={<ProductDetails />} />
+            </Routes>
         </>
     )
 }
